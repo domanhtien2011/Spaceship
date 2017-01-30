@@ -1,4 +1,5 @@
 class Player
+  attr_reader :x, :y, :radius, :angle
  ROTATION_SPEED = 3
  ACCELERATION   = 2
  FRICTION       = 0.9
@@ -29,15 +30,15 @@ class Player
     @y += @velocity_y
     if @x > @window.width - @radius
       @velocity_x = 0
-      @x = @window.width - @radius # so the whole ship is in the window screen
+      @x = @window.width - @radius - 25 # so the whole ship is in the window screen
     end
     if @x < @radius
       @velocity_x = 0
-      @x = @radius # so the whole ship is in the window screen
+      @x = @radius + 25 # so the whole ship is in the window screen
     end
     if @y > @window.height - @radius
-      @velocity_y = 0
-      @y = @window.height - @radius # so the whole ship is in the window screen
+      @velocity_y *= -1
+      @y += @velocity_y # so the whole ship is in the window screen
     end
   end
 

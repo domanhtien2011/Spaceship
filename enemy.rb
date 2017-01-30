@@ -1,27 +1,20 @@
 class Enemy
-  def initialize(window, angle)
+  attr_reader :x, :y, :radius
+  def initialize(window)
     @radius = 20
     @x = rand(window.width - 2 * @radius) + @radius
     @y = 0
     @image = Gosu::Image.new('images/enemy.png')
     @window = window
-    @speed = 1
-    @angle = angle
-    @velocity_x = 0
-    @velocity_y = 0
+    @speed = 4
   end
 
   def draw
-    @image.draw_rot(@x, @y , 1, @angle)
+    # Use draw_rot method to draw the image with a customized angle
+    @image.draw(@x, @y , 1)
   end
 
   def move
-    @velocity_x += Gosu.offset_x(@angle, @speed) * 0.05
-    @velocity_y += Gosu.offset_y(@angle, @speed) * 0.05
-    @x          -= @velocity_x
-    @y          -= @velocity_y
-    # if @y < 0
-    #   @speed *= -1
-    # end
+    @y += @speed
   end
 end
